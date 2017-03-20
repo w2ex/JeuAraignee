@@ -28,7 +28,7 @@ private :
     vector<int*>* pions1; //enregistre les positions des pions du joueur 1 dans la liste 'plateau'
     vector<int*>* pions2; //idem joueur 2
     int depart; // position du pion selectionné à déplacer
-    vector<int*>* accessibles[9]; //positions voisines accessibles pour le pions sélectionné
+    vector<int>* accessibles[9]; //positions voisines accessibles pour le pions sélectionné
     bool deplacement; // indique la phase du jeu en cours
     int score1 ;
     int score2 ;
