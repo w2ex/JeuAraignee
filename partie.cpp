@@ -1,4 +1,5 @@
 #include <vector>
+#include <algorithm>
 #include "partie.h"
 #include "points.h"
 using namespace std;
@@ -11,8 +12,8 @@ Partie::Partie()
     score2 = 0;
 
     plateau = new vector<Points*>;
-    pions1 = new vector<int*>;
-    pions2 = new vector<int*>;
+    pions1 = new vector<int>;
+    pions2 = new vector<int>;
     accessibles[9] = new vector<int>;
     plateau->push_back(new Points(100,100)); // création des noeuds du plateau
     plateau->push_back(new Points(100,250));
@@ -57,47 +58,47 @@ Partie::Partie()
     accessibles[8]->push_back(7);
 }
 
-Partie::afficher(){
+void Partie::afficher(){
     // ???
 }
 
-Partie::changerTour(){
+void Partie::changerTour(){
     noJoueur = 3-noJoueur;
     // Rafraichir page + message dans une fenetre ?
 }
 
-Partie::getNumeroJoueur(){
+int Partie::getNumeroJoueur(){
     return noJoueur;
 }
 
-Partie::testVictoire(){
+void Partie::testVictoire(){
     this->noJoueur=3-this->noJoueur;
 }
 
-Partie::reset(){
+void Partie::reset(){
     noJoueur = 1 ;
-    deplacement = False ;
-    pions1 = new vector<int*>;
-    pions2 = new vector<int*>;
+    deplacement = false ;
+    pions1 = new vector<int>;
+    pions2 = new vector<int>;
 }
 
-Partie::getDeplacement(){ // true si phase de déplacement, false si phase de placement
+bool Partie::getDeplacement(){ // true si phase de déplacement, false si phase de placement
     return deplacement ;
 }
 
-Partie::setDeplacement(bool b){
+void Partie::setDeplacement(bool b){
     deplacement = b ;
 }
 
-Partie::getDepart(){ // donne la position de départ du jeton si phase de déplacement
+int Partie::getDepart(){ // donne la position de départ du jeton si phase de déplacement
     return depart ;
 }
 
-Partie::setDepart(int i){
+void Partie::setDepart(int i){
     depart = i;
 }
 
-Partie::ajouterPions(int p, int i){
+void Partie::ajouterPions(int p, int i){
     if (p==1){
         pions1->push_back(i);
     }
@@ -106,27 +107,27 @@ Partie::ajouterPions(int p, int i){
     }
 }
 
-Partie::taillePions(int p){ // renvoie le nombre de jetons du joueur p posés sur le plateau
+int Partie::taillePions(int p){ // renvoie le nombre de jetons du joueur p posés sur le plateau
     if (p==1){
         return pions1->size();
     }
     else if (p==2){
-        return pion2.size();
+        return pions2->size();
     }
     return 0 ;
 }
 
-Partie::contient(int p, int i){
+bool Partie::contient(int p, int i){
     if (p==1){
         return (std::find(pions1->begin(), pions1->end(), i) != pions1->end()) ;
     }
     else if (p==2){
         return (std::find(pions2->begin(), pions2->end(), i) != pions2->end()) ;
     }
-    return False ;
+    return false ;
 }
 
-Partie::getPions(int p, int i){
+int Partie::getPions(int p, int i){
     if (p==1){
         return pions1->at(i) ;
     }
@@ -138,21 +139,21 @@ Partie::getPions(int p, int i){
     }
 }
 
-Partie::removePions(int p, int i){
+void Partie::removePions(int p, int i){
     if (p==1){
-        pions1->erase(pions1->begin()+i)
+        pions1->erase(pions1->begin()+i);
     }
     if (p==2){
-        pions2->erase(pions2->begin()+i)
+        pions2->erase(pions2->begin()+i);
     }
 }
 
-Partie::resetScore(){
+void Partie::resetScore(){
     score1 = 0;
     score2 = 0;
 }
 
-Partie::traitement(int i){
+void Partie::traitement(int i){
     // phase de placement des pions
     if (this->getNumeroJoueur()==1 && this->taillePions(1)<3 && this->contient(2,i)==false && this->contient(1,i)==false && this->getDeplacement()==false){
         this->ajouterPions(1,i);
@@ -183,7 +184,7 @@ Partie::traitement(int i){
     }
     // phase de déplacement : pose du pion déplacé
     else if (this->getDeplacement() && this->getNumeroJoueur()==1){
-        for (int k : this->pointsaccessibles.get(this->getDepart())){
+        for (int k : this->accessibles.at(this->getDepart())){
             if (i==k && this->contient(2,k)==false && this->contient(1,k)==false){
                 this->ajouterPions(1,k);
                 this->setDeplacement(false);
@@ -192,7 +193,7 @@ Partie::traitement(int i){
         }
     }
     else if (this->getDeplacement() && this->getNumeroJoueur()==2){
-        for (int k : this->pointsaccessibles.get(this->getDepart())){
+        for (int k : this->accessibles.at(this->getDepart())){
             if (i==k && this->contient(2,k)==false && this->contient(1,k)==false){
                 this->ajouterPions(2,k);
                 this->setDeplacement(false);
