@@ -71,7 +71,7 @@ Partie::getNumeroJoueur(){
 }
 
 Partie::testVictoire(){
-
+    if (pions1->size() == 3)
 }
 
 Partie::reset(){
