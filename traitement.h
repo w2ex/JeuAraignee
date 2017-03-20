@@ -5,7 +5,8 @@
 class Traitement
 {
 public:
-    Traitement();
+    Traitement(Partie p);
+
 };
 
 #endif // TRAITEMENT_H
