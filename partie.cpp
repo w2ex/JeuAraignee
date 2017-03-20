@@ -71,7 +71,7 @@ Partie::getNumeroJoueur(){
 }
 
 Partie::testVictoire(){
-
+    this->noJoueur=3-this->noJoueur;
 }
 
 Partie::reset(){
@@ -150,5 +150,55 @@ Partie::removePions(int p, int i){
 Partie::resetScore(){
     score1 = 0;
     score2 = 0;
+}
+
+Partie::traitement(int i){
+    // phase de placement des pions
+    if (this->getNumeroJoueur()==1 && this->taillePions(1)<3 && this->contient(2,i)==false && this->contient(1,i)==false && this->getDeplacement()==false){
+        this->ajouterPions(1,i);
+        this->testVictoire();
+    }
+    else if (this->getNumeroJoueur()==2 && this->taillePions(2)<3 && this->contient(2,i)==false && this->contient(1,i)==false && this->getDeplacement()==false){
+        this->ajouterPions(2,i);
+        this->testVictoire();
+    }
+    // phase de déplacement : sélection du pion à déplacer
+    else if (this->getNumeroJoueur()==1 && this->contient(1,i) && this->taillePions(1)==3){
+        for (int j=0 ; j<this->taillePions(1); j++){
+            if (this->getPions(1,j)==i){
+                this->removePions(1,j);
+                this->setDeplacement(true);
+                this->setDepart(i);
+            }
+        }
+    }
+    else if (this->getNumeroJoueur()==2 && this->contient(2,i) && this->taillePions(2)==3){
+        for (int j=0 ; j<this->taillePions(2); j++){
+            if (this->getPions(2,j)==i){
+                this->removePions(2,j);
+                this->setDeplacement(true);
+                this->setDepart(i);
+            }
+        }
+    }
+    // phase de déplacement : pose du pion déplacé
+    else if (this->getDeplacement() && this->getNumeroJoueur()==1){
+        for (int k : this->pointsaccessibles.get(this->getDepart())){
+            if (i==k && this->contient(2,k)==false && this->contient(1,k)==false){
+                this->ajouterPions(1,k);
+                this->setDeplacement(false);
+                this->testVictoire();
+            }
+        }
+    }
+    else if (this->getDeplacement() && this->getNumeroJoueur()==2){
+        for (int k : this->pointsaccessibles.get(this->getDepart())){
+            if (i==k && this->contient(2,k)==false && this->contient(1,k)==false){
+                this->ajouterPions(2,k);
+                this->setDeplacement(false);
+                this->testVictoire();
+            }
+        }
+    }
 }
 
