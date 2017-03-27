@@ -1,3 +1,3 @@
 # JeuAraignee
 
-par Thomas PETIT(w2ex)
+par Thomas PETIT(w2ex) et Enoal LEPOITTEVIN
