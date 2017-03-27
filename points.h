@@ -8,7 +8,7 @@ public:
     Points(int X, int Y);
     int getx() ;
     int gety();
-    bool colineaires(Points a, Points b);
+    bool colineaires(Points *a, Points *b);
 private :
     int x;
     int y;

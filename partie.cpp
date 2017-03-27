@@ -10,20 +10,21 @@ Partie::Partie()
     deplacement = false;
     score1 = 0;
     score2 = 0;
+    depart = 0;
 
     plateau = new vector<Points*>;
     pions1 = new vector<int>;
     pions2 = new vector<int>;
     accessibles[9] = new vector<int>;
-    plateau->push_back(new Points(100,100)); // création des noeuds du plateau
-    plateau->push_back(new Points(100,250));
-    plateau->push_back(new Points(100,400));
-    plateau->push_back(new Points(250,100));
-    plateau->push_back(new Points(250,250));
-    plateau->push_back(new Points(250,400));
-    plateau->push_back(new Points(400,100));
-    plateau->push_back(new Points(400,250));
-    plateau->push_back(new Points(400,400));
+    plateau->push_back(new Points(1,1)); // création des noeuds du plateau
+    plateau->push_back(new Points(1,2));
+    plateau->push_back(new Points(1,3));
+    plateau->push_back(new Points(2,1));
+    plateau->push_back(new Points(2,2));
+    plateau->push_back(new Points(2,3));
+    plateau->push_back(new Points(3,1));
+    plateau->push_back(new Points(3,2));
+    plateau->push_back(new Points(3,3));
     accessibles[0]->push_back(1); // on crée une liste de listes : la première liste contient les voisins du premier noeud, la seconde du second etc...
     accessibles[0]->push_back(3);
     accessibles[0]->push_back(4);
@@ -72,6 +73,18 @@ int Partie::getNumeroJoueur(){
 }
 
 void Partie::testVictoire(){
+    if (this->taillePions(this->getNumeroJoueur())==3){
+        if (this->getNumeroJoueur()==1){
+            if (plateau->at(pions1->at(0))->colineaires(plateau->at(pions1->at(1)), plateau->at(pions1->at(2)))){
+                //afficher message victoire
+            }
+        }
+        if (this->getNumeroJoueur()==2){
+            if (plateau->at(pions2->at(0))->colineaires(plateau->at(pions2->at(1)), plateau->at(pions2->at(2)))){
+                //afficher message victoire
+            }
+        }
+    }
     this->noJoueur=3-this->noJoueur;
 }
 
@@ -184,18 +197,18 @@ void Partie::traitement(int i){
     }
     // phase de déplacement : pose du pion déplacé
     else if (this->getDeplacement() && this->getNumeroJoueur()==1){
-        for (int k : this->accessibles.at(this->getDepart())){
-            if (i==k && this->contient(2,k)==false && this->contient(1,k)==false){
-                this->ajouterPions(1,k);
+        for (int k = 0 ; k<accessibles[depart]->size(); k++){
+            if (i==accessibles[depart]->at(k) && this->contient(2,i)==false && this->contient(1,i)==false){
+                this->ajouterPions(1,i);
                 this->setDeplacement(false);
                 this->testVictoire();
             }
         }
     }
     else if (this->getDeplacement() && this->getNumeroJoueur()==2){
-        for (int k : this->accessibles.at(this->getDepart())){
-            if (i==k && this->contient(2,k)==false && this->contient(1,k)==false){
-                this->ajouterPions(2,k);
+        for (int k = 0 ; k<accessibles[depart]->size(); k++){
+            if (i==accessibles[depart]->at(k) && this->contient(2,i)==false && this->contient(1,i)==false){
+                this->ajouterPions(2,i);
                 this->setDeplacement(false);
                 this->testVictoire();
             }
