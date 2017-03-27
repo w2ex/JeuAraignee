@@ -1,3 +1,3 @@
 # JeuAraignee
 
-par Thomas PETIT
+par Thomas PETIT(w2ex)
