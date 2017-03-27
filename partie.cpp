@@ -1,5 +1,6 @@
 #include <vector>
 #include <algorithm>
+#include <iostream>
 #include "partie.h"
 #include "points.h"
 using namespace std;
@@ -15,7 +16,15 @@ Partie::Partie()
     plateau = new vector<Points*>;
     pions1 = new vector<int>;
     pions2 = new vector<int>;
-    accessibles[9] = new vector<int>;
+    accessibles[0] = new vector<int>;
+    accessibles[1] = new vector<int>;
+    accessibles[2] = new vector<int>;
+    accessibles[3] = new vector<int>;
+    accessibles[4] = new vector<int>;
+    accessibles[5] = new vector<int>;
+    accessibles[6] = new vector<int>;
+    accessibles[7] = new vector<int>;
+    accessibles[8] = new vector<int>;
     plateau->push_back(new Points(1,1)); // création des noeuds du plateau
     plateau->push_back(new Points(1,2));
     plateau->push_back(new Points(1,3));
