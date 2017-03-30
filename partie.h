@@ -4,7 +4,7 @@
 #include "points.h"
 using namespace std;
 
-class Partie
+class Partie // Enoal : faut-il écrire class Partie : public QObject pour rendre les instances de Partie accessible à main.qml ???
 {
 public:
     Partie();
