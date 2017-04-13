@@ -2,5 +2,7 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>MainForm.ui.qml</file>
+        <file>../../Téléchargements/Cercle.png</file>
+        <file>../../Téléchargements/Croix.png</file>
     </qresource>
 </RCC>

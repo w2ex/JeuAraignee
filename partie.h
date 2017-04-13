@@ -2,17 +2,19 @@
 #define PARTIE_H
 #include <vector>
 #include "points.h"
+#include <QObject>
 using namespace std;
 
-class Partie // Enoal : faut-il écrire class Partie : public QObject pour rendre les instances de Partie accessible à main.qml ???
+class Partie : public QObject
 {
+    Q_OBJECT
 public:
     Partie();
     void afficher();
     void changerTour(); // passe au tour du joueur suivant
-    int getNumeroJoueur(); // donne le joueur en cours
+    Q_INVOKABLE int getNumeroJoueur(); // donne le joueur en cours
     void testVictoire(); // teste les conditions de victoire
-    void reset(); // reset la partie
+    Q_INVOKABLE void reset(); // reset la partie
     bool getDeplacement() ; // indique la phase du jeu
     void setDeplacement(bool b) ;
     void setDepart(int i) ; // sélectionner la position de départ du pion à déplacer
@@ -24,11 +26,17 @@ public:
     void removePions(int p, int i); //retire la position i de la liste des pions du joueur p
     void resetScore();
     vector<Points*>* plateau; // position des noeuds du plateau
-    void traitement(int i);
+    Q_INVOKABLE void traitement(int i);
+    Q_INVOKABLE bool estVisible(int p, int j);
+    Q_INVOKABLE QString getScore(int p);
+
+signals :
+    void actionOccured();
+
 private :
     int noJoueur; //numéro du joueur en cours
-    vector<int>* pions1; //enregistre les positions des pions du joueur 1 dans la liste 'plateau'
-    vector<int>* pions2; //idem joueur 2
+    QList<int>* pions1; //enregistre les positions des pions du joueur 1 dans la liste 'plateau'
+    QList<int>* pions2; //idem joueur 2
     int depart; // position du pion selectionné à déplacer
     vector<int>* accessibles[9]; //positions voisines accessibles pour le pions sélectionné
     bool deplacement; // indique la phase du jeu en cours
