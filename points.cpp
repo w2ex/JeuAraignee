@@ -1,24 +1,24 @@
 #include "points.h"
 
-Points::Points(int X, int Y) // constructeur
+Points::Points(int X, int Y)
 {
     x=X;
     y=Y;
 }
 
-Points::getx(){ // classique
+int Points::getx(){
     return x;
 }
 
-Points::gety(){
+int Points::gety(){
     return y;
 }
 
 bool Points::colineaires(Points *a, Points *b){
-    if ((a->gety()==b->gety()) && (a->gety()==y)){ // première condition pour éviter la division par zéro ensuite
+    if ((a->gety()==b->gety()) && (a->gety()==y)){
                 return true;
     }
-    else if(((a->getx()-x))/((float)(a->gety()-y))==((a->getx()-b->getx())/(float)(a->gety()-b->gety()))){ // classique test de colinéarité
+    else if(((a->getx()-x))/((float)(a->gety()-y))==((a->getx()-b->getx())/(float)(a->gety()-b->gety()))){
         return true;
     }
     return false;
