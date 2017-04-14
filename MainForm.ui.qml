@@ -20,6 +20,25 @@ Item {
     property alias button1: button1
     property alias text3: text3
     property alias text4: text4
+    property alias image2 : image2
+    property alias image1 : image1
+    property alias image3 : image3
+    property alias image4 : image4
+    property alias image5 : image5
+    property alias image6 : image6
+    property alias image7 : image7
+    property alias image8 : image8
+    property alias image9 : image9
+    property alias image10 : image10
+    property alias image11 : image11
+    property alias image12 : image12
+    property alias image13 : image13
+    property alias image14 : image14
+    property alias image15 : image15
+    property alias image16 : image16
+    property alias image17 : image17
+    property alias image18 : image18
+
 
 
 
@@ -68,17 +87,19 @@ Item {
             anchors.top: parent.top
             anchors.topMargin: 0
 
-            Rectangle {
-                id: rectangle
-                x: 0
-                y: 0
-                width: 40
-                height: 40
-                color: serveurPartie.srvrQML[0]
-                anchors.verticalCenterOffset: -15
-                anchors.horizontalCenterOffset: -15
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.horizontalCenter: parent.horizontalCenter
+
+            Image {
+                id: image1
+                anchors.fill: parent
+                source: "Cercle.png"
+                visible : false
+            }
+
+            Image {
+                id: image2
+                anchors.fill: parent
+                source: "Croix.png"
+                visible : false
             }
         }
 
@@ -91,17 +112,20 @@ Item {
             anchors.topMargin: 0
             anchors.horizontalCenter: parent.horizontalCenter
 
-            Rectangle {
-                id: rectangle1
-                x: 0
-                y: 0
-                width: 40
-                height: 40
-                color: serveurPartie.srvrQML[1]
-                anchors.horizontalCenterOffset: 0
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.verticalCenterOffset: -15
+            Image {
+                id: image3
+                anchors.fill: parent
+                source: "Cercle.png"
+                visible: false
+            }
+
+            Image {
+                id: image4
+                x: 2
+                y: 9
+                anchors.fill: parent
+                source: "Croix.png"
+                visible: false
             }
         }
 
@@ -115,17 +139,20 @@ Item {
             anchors.right: parent.right
             anchors.rightMargin: 0
 
-            Rectangle {
-                id: rectangle2
-                x: 0
-                y: 0
-                width: 40
-                height: 40
-                color: serveurPartie.srvrQML[2]
-                anchors.horizontalCenterOffset: 15
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.verticalCenterOffset: -15
+            Image {
+                id: image5
+                anchors.fill: parent
+                source: "Cercle.png"
+                visible: false
+            }
+
+            Image {
+                id: image6
+                x: 2
+                y: 9
+                anchors.fill: parent
+                source: "Croix.png"
+                visible: false
             }
         }
 
@@ -138,17 +165,20 @@ Item {
             anchors.leftMargin: 0
             anchors.verticalCenter: parent.verticalCenter
 
-            Rectangle {
-                id: rectangle3
-                x: 0
-                y: 0
-                width: 40
-                height: 40
-                color: serveurPartie.srvrQML[3]
-                anchors.horizontalCenterOffset: -15
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.verticalCenterOffset: 0
+            Image {
+                id: image7
+                anchors.fill: parent
+                source: "Cercle.png"
+                visible: false
+            }
+
+            Image {
+                id: image8
+                x: 8
+                y: -6
+                anchors.fill: parent
+                source: "Cercle.png"
+                visible: false
             }
         }
 
@@ -159,17 +189,20 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
 
-            Rectangle {
-                id: rectangle4
-                x: 0
-                y: 0
-                width: 40
-                height: 40
-                color: serveurPartie.srvrQML[4]
-                anchors.horizontalCenterOffset: 0
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.verticalCenterOffset: 0
+            Image {
+                id: image9
+                anchors.fill: parent
+                source: "Cercle.png"
+                visible: false
+            }
+
+            Image {
+                id: image10
+                x: 2
+                y: 9
+                anchors.fill: parent
+                source: "Croix.png"
+                visible: false
             }
         }
 
@@ -181,17 +214,20 @@ Item {
             anchors.rightMargin: 0
             anchors.verticalCenter: parent.verticalCenter
 
-            Rectangle {
-                id: rectangle5
-                x: 0
-                y: 0
-                width: 40
-                height: 40
-                color: serveurPartie.srvrQML[5]
-                anchors.horizontalCenterOffset: 15
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.verticalCenterOffset: 0
+            Image {
+                id: image11
+                anchors.fill: parent
+                source: "Cercle.png"
+                visible: false
+            }
+
+            Image {
+                id: image12
+                x: 2
+                y: 9
+                anchors.fill: parent
+                source: "Croix.png"
+                visible: false
             }
         }
 
@@ -205,17 +241,20 @@ Item {
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 0
 
-            Rectangle {
-                id: rectangle6
-                x: 0
-                y: 0
-                width: 40
-                height: 40
-                color: serveurPartie.srvrQML[6]
-                anchors.horizontalCenterOffset: -15
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.verticalCenterOffset: 15
+            Image {
+                id: image13
+                anchors.fill: parent
+                source: "Cercle.png"
+                visible: false
+            }
+
+            Image {
+                id: image14
+                x: 2
+                y: 9
+                anchors.fill: parent
+                source: "Croix.png"
+                visible: false
             }
         }
 
@@ -229,17 +268,20 @@ Item {
             anchors.bottomMargin: 0
             anchors.horizontalCenter: parent.horizontalCenter
 
-            Rectangle {
-                id: rectangle7
-                x: 0
-                y: 0
-                width: 40
-                height: 40
-                color: serveurPartie.srvrQML[7]
-                anchors.horizontalCenterOffset: 0
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.verticalCenterOffset: 15
+            Image {
+                id: image15
+                anchors.fill: parent
+                source: "Cercle.png"
+                visible: false
+            }
+
+            Image {
+                id: image16
+                x: 2
+                y: 9
+                anchors.fill: parent
+                source: "Croix.png"
+                visible: false
             }
         }
 
@@ -254,17 +296,20 @@ Item {
             anchors.right: parent.right
             anchors.rightMargin: 0
 
-            Rectangle {
-                id: rectangle8
-                x: 0
-                y: 0
-                width: 40
-                height: 40
-                color: serveurPartie.srvrQML[8]
-                anchors.horizontalCenterOffset: 15
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.verticalCenterOffset: 15
+            Image {
+                id: image17
+                anchors.fill: parent
+                source: "Cercle.png"
+                visible: false
+            }
+
+            Image {
+                id: image18
+                x: 2
+                y: 9
+                anchors.fill: parent
+                source: "Croix.png"
+                visible: false
             }
         }
 
