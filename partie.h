@@ -13,7 +13,7 @@ public:
     void afficher();
     void changerTour(); // passe au tour du joueur suivant
     Q_INVOKABLE int getNumeroJoueur(); // donne le joueur en cours
-    void testVictoire(); // teste les conditions de victoire
+    Q_INVOKABLE bool testVictoire(); // teste les conditions de victoire
     Q_INVOKABLE void reset(); // reset la partie
     bool getDeplacement() ; // indique la phase du jeu
     void setDeplacement(bool b) ;
@@ -24,11 +24,12 @@ public:
     bool contient (int p, int i);
     int getPions(int p, int i) ; //Pour accéder à la valeur de la position enregistrée en position i dans la liste des pions du joueur p
     void removePions(int p, int i); //retire la position i de la liste des pions du joueur p
-    void resetScore();
+    Q_INVOKABLE void resetScore();
     vector<Points*>* plateau; // position des noeuds du plateau
     Q_INVOKABLE void traitement(int i);
     Q_INVOKABLE bool estVisible(int p, int j);
     Q_INVOKABLE QString getScore(int p);
+    Q_INVOKABLE void augmenterScore(int i);
 
 signals :
     void actionOccured();

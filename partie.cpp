@@ -35,18 +35,23 @@ Partie::Partie()
     plateau->push_back(new Points(3,1));
     plateau->push_back(new Points(3,2));
     plateau->push_back(new Points(3,3));
-    accessibles[0]->push_back(1); // on crée une liste de listes : la première liste contient les voisins du premier noeud, la seconde du second etc...
+    accessibles[0]->push_back(0); // on crée une liste de listes : la première liste contient les voisins du premier noeud, la seconde du second etc... Pour ne pas bloquer le jeu, on considère que chaque noeud est son propre voisin
+    accessibles[0]->push_back(1);
     accessibles[0]->push_back(3);
     accessibles[0]->push_back(4);
+    accessibles[1]->push_back(1);
     accessibles[1]->push_back(0);
     accessibles[1]->push_back(2);
     accessibles[1]->push_back(4);
+    accessibles[2]->push_back(2);
     accessibles[2]->push_back(1);
     accessibles[2]->push_back(4);
     accessibles[2]->push_back(5);
+    accessibles[3]->push_back(3);
     accessibles[3]->push_back(0);
     accessibles[3]->push_back(4);
     accessibles[3]->push_back(6);
+    accessibles[4]->push_back(4);
     accessibles[4]->push_back(0);
     accessibles[4]->push_back(1);
     accessibles[4]->push_back(2);
@@ -55,15 +60,19 @@ Partie::Partie()
     accessibles[4]->push_back(6);
     accessibles[4]->push_back(7);
     accessibles[4]->push_back(8);
+    accessibles[5]->push_back(5);
     accessibles[5]->push_back(2);
     accessibles[5]->push_back(4);
     accessibles[5]->push_back(8);
+    accessibles[6]->push_back(6);
     accessibles[6]->push_back(3);
     accessibles[6]->push_back(4);
     accessibles[6]->push_back(7);
+    accessibles[7]->push_back(7);
     accessibles[7]->push_back(6);
     accessibles[7]->push_back(4);
     accessibles[7]->push_back(8);
+    accessibles[8]->push_back(8);
     accessibles[8]->push_back(5);
     accessibles[8]->push_back(4);
     accessibles[8]->push_back(7);
@@ -72,30 +81,39 @@ Partie::Partie()
 
 
 void Partie::changerTour(){
-    cout << "Fin du joueur "<<noJoueur<<endl;
     noJoueur = 3-noJoueur;
-    cout << "Debut du tour du joueur "<<noJoueur<<endl;
     actionOccured();
-    // Rafraichir page + message dans une fenetre ?
+}
+
+void Partie::augmenterScore(int i){
+    if (i==1)
+            score1=score1+1;
+   else if (i==2)
+           score2=score2+1;
 }
 
 int Partie::getNumeroJoueur(){
     return noJoueur;
 }
 
-void Partie::testVictoire(){
-    if (this->taillePions(this->getNumeroJoueur())==3){
-        if (this->getNumeroJoueur()==1){
+bool Partie::testVictoire(){
+    bool b = true;
+    if (this->taillePions(1)==3){
             if (plateau->at(pions1->at(0))->colineaires(plateau->at(pions1->at(1)), plateau->at(pions1->at(2)))){
-                cout << "victoire";
+                return b;
+                actionOccured();
             }
         }
-        if (this->getNumeroJoueur()==2){
+    if (this->taillePions(2)==3){
             if (plateau->at(pions2->at(0))->colineaires(plateau->at(pions2->at(1)), plateau->at(pions2->at(2)))){
-                cout << "victoire";
+                return b;
+                actionOccured();
             }
         }
-    }
+        else {
+            b=false;
+            return b;
+        }
 }
 
 void Partie::reset(){
@@ -180,22 +198,15 @@ void Partie::resetScore(){
 void Partie::traitement(int i){
     // phase de placement des pions
     if (this->getNumeroJoueur()==1 && this->taillePions(1)<3 && this->contient(2,i)==false && this->contient(1,i)==false && this->getDeplacement()==false){
-        cout << "tour joueur 1 phase 1" << endl;
         this->ajouterPions(1,i);
-        this->testVictoire();
-        this->testVictoire();
         Partie::changerTour();
     }
     else if (this->getNumeroJoueur()==2 && this->taillePions(2)<3 && this->contient(2,i)==false && this->contient(1,i)==false && this->getDeplacement()==false){
-        cout << "tour joueur 2 phase 1" << endl;
         this->ajouterPions(2,i);
-        this->testVictoire();
-        this->testVictoire();
         Partie::changerTour();
     }
     // phase de déplacement : sélection du pion à déplacer
     else if (this->getNumeroJoueur()==1 && this->contient(1,i) && this->taillePions(1)==3 && this->getDeplacement()==false){
-        cout << "tour joueur 1 phase 2" << endl;
         for (int j=0 ; j<this->taillePions(1); j++){
             if (this->getPions(1,j)==i){
                 this->removePions(1,j);
@@ -205,7 +216,6 @@ void Partie::traitement(int i){
         }
     }
     else if (this->getNumeroJoueur()==2 && this->contient(2,i) && this->taillePions(2)==3 && this->getDeplacement()==false){
-        cout << "tour joueur 2 phase 2" << endl;
         for (int j=0 ; j<this->taillePions(2); j++){
             if (this->getPions(2,j)==i){
                 this->removePions(2,j);
@@ -216,28 +226,23 @@ void Partie::traitement(int i){
     }
     // phase de déplacement : pose du pion déplacé
     else if (this->getDeplacement() && this->getNumeroJoueur()==1 && this->getDeplacement()){
-        cout << "tour joueur 1 phase 3" << endl;
         for (int k = 0 ; k<accessibles[depart]->size(); k++){
             if (i==accessibles[depart]->at(k) && this->contient(2,i)==false && this->contient(1,i)==false){
                 this->ajouterPions(1,i);
                 this->setDeplacement(false);
-                this->testVictoire();
                 Partie::changerTour();
             }
         }
     }
     else if (this->getDeplacement() && this->getNumeroJoueur()==2 && this->getDeplacement()){
-        cout << "tour joueur 2 phase 3" ;
         for (int k = 0 ; k<accessibles[depart]->size(); k++){
             if (i==accessibles[depart]->at(k) && this->contient(2,i)==false && this->contient(1,i)==false){
                 this->ajouterPions(2,i);
                 this->setDeplacement(false);
-                this->testVictoire();
                 Partie::changerTour();
             }
         }
     }
-    cout << getNumeroJoueur() << noJoueur << endl;
 }
 
 bool Partie::estVisible(int p, int j){

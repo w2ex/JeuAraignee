@@ -2,6 +2,7 @@ import QtQuick 2.5
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.2
 import QtGraphicalEffects 1.0
+import QtQuick.Dialogs 1.1
 
 Item {
     id: item1
@@ -38,6 +39,7 @@ Item {
     property alias image16 : image16
     property alias image17 : image17
     property alias image18 : image18
+    property alias message : message
 
 
 
@@ -73,10 +75,10 @@ Item {
         width: 323
         height: 323
         color: "#ffffff"
-        anchors.verticalCenterOffset: 0
+        anchors.verticalCenterOffset: 200
         anchors.horizontalCenterOffset: 0
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: titre.verticalCenter
+        anchors.horizontalCenter: titre.horizontalCenter
 
         MouseArea {
             id: zone0
@@ -177,7 +179,7 @@ Item {
                 x: 8
                 y: -6
                 anchors.fill: parent
-                source: "Cercle.png"
+                source: "Croix.png"
                 visible: false
             }
         }
@@ -395,6 +397,10 @@ Item {
         x: 38
         y: 398
         text: qsTr("Reset")
+        anchors.horizontalCenterOffset: -100
+        anchors.verticalCenterOffset: 180
+        anchors.verticalCenter: fontdejeu.verticalCenter
+        anchors.horizontalCenter: fontdejeu.horizontalCenter
     }
 
     Button {
@@ -402,29 +408,41 @@ Item {
         x: 268
         y: 398
         text: qsTr("Reset score")
+        anchors.horizontalCenterOffset: 100
+        anchors.horizontalCenter: fontdejeu.horizontalCenter
+        anchors.verticalCenterOffset: 180
+        anchors.verticalCenter: fontdejeu.verticalCenter
     }
 
     Text {
         id: text1
-        x: 8
-        y: 8
         text: qsTr("Score 1 :")
+        anchors.top: parent.top
+        anchors.topMargin: 8
+        anchors.left: parent.left
+        anchors.leftMargin: 8
         font.pixelSize: 15
     }
 
     Text {
         id: text2
         x: 333
-        y: 8
         text: qsTr("Score 2 :")
+        anchors.top: parent.top
+        anchors.topMargin: 8
+        anchors.right: parent.right
+        anchors.rightMargin: 1
         font.pixelSize: 15
     }
 
     Text {
         id: text3
-        x: 8
         y: 32
         text: qsTr("Text")
+        anchors.verticalCenterOffset: 20
+        anchors.verticalCenter: text1.verticalCenter
+        anchors.left: parent.left
+        anchors.leftMargin: 8
         font.bold: true
         font.pixelSize: 15
     }
@@ -434,8 +452,15 @@ Item {
         x: 359
         y: 32
         text: qsTr("Text")
+        anchors.verticalCenterOffset: 20
+        anchors.verticalCenter: text2.verticalCenter
+        anchors.right: parent.right
+        anchors.rightMargin: 4
         font.bold: true
         font.pixelSize: 15
+    }
+    MessageDialog {
+        id : message
     }
 
 
